@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText email_field;
     private EditText password_field;
-    public SQLiteHelperConection con;
+    private SQLiteHelperConection con;
     private Cursor cursor;
 
     @Override
@@ -52,23 +52,19 @@ public class MainActivity extends AppCompatActivity {
             cursor = db.rawQuery("SELECT " + Utilidades.EMAIL + ", " + Utilidades.PASSWORD + " FROM "
                     + Utilidades.USER_TABLE + " WHERE " + Utilidades.EMAIL + " = '" + user + "' AND "
                     + Utilidades.PASSWORD + " = '" + password + "'", null);
-            if (cursor.moveToFirst()) {
-                String usr = cursor.getString(0);
-                String pwd = cursor.getString(1);
-                if (user.equals(usr) && password.equals(pwd)) {
-                    Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
-                    startActivity(intent);
-                }
+            cursor.moveToFirst();
+            String usr = cursor.getString(0);
+            String pwd = cursor.getString(1);
+            if (user.equals(usr) && password.equals(pwd)) {
+                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MainActivity.this, "Compruebe los datos", Toast.LENGTH_LONG).show();
             }
             cursor.close();
         } catch (Exception e) {
-            Toast.makeText(MainActivity.this, "El usuario no existe o la información no corresponde", Toast.LENGTH_LONG).show();
-            clean();
-        }
-    }
+            Toast.makeText(MainActivity.this, "¡Error! Inténtelo de nuevo", Toast.LENGTH_LONG).show();
 
-    private void clean() {
-        email_field.setText("");
-        password_field.setText("");
+        }
     }
 }

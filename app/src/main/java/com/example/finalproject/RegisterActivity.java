@@ -15,11 +15,10 @@ import com.example.finalproject.utilidades.Utilidades;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText email_field;
-    EditText name_field;
-    EditText password_field;
-    EditText phone_field;
-    User user;
+    public EditText email_field = null;
+    public EditText name_field = null;
+    public EditText password_field = null;
+    public EditText phone_field = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
                 intent = new Intent(RegisterActivity.this, WelcomeActivity.class);
                 userRegister();
                 startActivity(intent);
-                Toast.makeText(RegisterActivity.this, "Bienvenidx", Toast.LENGTH_LONG).show();
-                user.toString();
+                Toast.makeText(RegisterActivity.this, "Bienvenidx " , Toast.LENGTH_LONG).show();
                 break;
         }
     }
