@@ -43,9 +43,11 @@ public class DeleteBookActivity extends AppCompatActivity {
         String str = cursor.getString(0);
         try {
             if (delete_book_field.getText().toString().equals(str)) {
-                db.delete(Utilidades.BOOK_TABLE, Utilidades.BOOK_TITLE + " = " + str, null);
+                db.execSQL("DELETE FROM " + Utilidades.BOOK_TABLE + " WHERE " + Utilidades.BOOK_TITLE + " = '" + str + "'");
                 Toast.makeText(DeleteBookActivity.this, "Eliminado", Toast.LENGTH_SHORT).show();
                 db.close();
+            } else {
+                Toast.makeText(DeleteBookActivity.this, "Inténtalo de nuevo", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Toast.makeText(DeleteBookActivity.this, "No ha sido posible la acción", Toast.LENGTH_SHORT).show();

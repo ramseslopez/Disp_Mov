@@ -43,9 +43,11 @@ public class DeleteGameActivity extends AppCompatActivity {
         String str = cursor.getString(0);
         try {
             if (delete_game_field.getText().toString().equals(str)) {
-                db.delete(Utilidades.GAME_TABLE, Utilidades.GAME_TITLE + " = " + str, null);
+                db.execSQL("DELETE FROM " + Utilidades.GAME_TABLE + " WHERE " + Utilidades.GAME_TITLE + " = '" + str + "'");
                 Toast.makeText(DeleteGameActivity.this, "Eliminado", Toast.LENGTH_SHORT).show();
                 db.close();
+            } else {
+                Toast.makeText(DeleteGameActivity.this, "Inténtalo de nuevo", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Toast.makeText(DeleteGameActivity.this, "No ha sido posible la acción", Toast.LENGTH_SHORT).show();
